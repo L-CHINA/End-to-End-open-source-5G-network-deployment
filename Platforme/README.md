@@ -107,7 +107,7 @@ reboot
 ```
 ## <a name='OAI CN5G-安装'></a>2.2 OAI CN5G-安装
 
-详细在oai_cn(https://github.com/wineslab/ORANSlice/tree/main/oai_cn))仓库有OAIv1.5.1-legacy版本和最新的版本develop。
+详细在oai_cn[ORANSlice](https://github.com/wineslab/ORANSlice/tree/main/oai_cn)仓库有OAIv1.5.1-legacy版本和最新的版本develop。
 
 以上主要参考官网的来制作基础版docker-compose，官网仓库：[OAI-CN](https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-fed/-/blob/master/docs/DEPLOY_HOME.md)
 大致分为：
