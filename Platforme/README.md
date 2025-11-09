@@ -107,7 +107,7 @@ reboot
 ```
 ## <a name='OAI CN5G-安装'></a>2.2 OAI CN5G-安装
 
-详细在oai_cn[Github Repo](.....)仓库有OAIv1.5.1-legacy版本和最新的版本develop。
+详细在oai_cn([.....](https://github.com/wineslab/ORANSlice/tree/main/oai_cn))仓库有OAIv1.5.1-legacy版本和最新的版本develop。
 
 以上主要参考官网的来制作基础版docker-compose，官网仓库：[OAI-CN](https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-fed/-/blob/master/docs/DEPLOY_HOME.md)
 大致分为：
@@ -144,14 +144,14 @@ sudo nano oai_db.sql
 INSERT INTO `AuthenticationSubscription` (`ueid`, `authenticationMethod`, `encPermanentKey`, `protectionParameterId`, `sequenceNumber`, `authenticationManagementField`, `algorithmId`, `encOpcKey`, `encTopcKey`, `vectorGenerationInHss`, `n5gcAuthMethod`, `rgAuthenticationInd`, `supi`) VALUES
 ('001010000060591', '5G_AKA', '18E8DE5BA04A8D910B010D298672BCE0', '18E8DE5BA04A8D910B010D298672BCE0', '{\"sqn\": \"000000000020\", \"sqnScheme\": \"NON_TIME_BASED\", \"lastIndexes\": {\"ausf\": 0}}', '8000', 'milenage', 'B71C0607B0A5AE6E3657FEE846579991', NULL, NULL, NULL, NULL, '001010000060591');
 ```
-<img src="./platform/db1.png" width="500" />
+<img src="./db1.png" width="500" />
 如下图在数据库中加入关于UE的上网信息APN：
 这个值需要注意一下，这个值需要是核心网的中的SMF组件中的DNN 列表中的一个，可以通过以下的两个文件来查看。
 ```
 INSERT INTO `SessionManagementSubscriptionData` (`ueid`, `servingPlmnid`, `singleNssai`, `dnnConfigurations`) VALUES
 ('208990000007487', '20895', '{\"sst\": 222, \"sd\": \"123\"}','{\"default\":{\"pduSessionTypes\":{ \"defaultSessionType\": \"IPV4\"},\"sscModes\": {\"defaultSscMode\": \"SSC_MODE_1\"},\"5gQosProfile\": {\"5qi\": 6,\"arp\":{\"priorityLevel\": 1,\"preemptCap\": \"NOT_PREEMPT\",\"preemptVuln\":\"NOT_PREEMPTABLE\"},\"priorityLevel\":1},\"sessionAmbr\":{\"uplink\":\"100Mbps\", \"downlink\":\"100Mbps\"},\"staticIpAddress\":[{\"ipv4Addr\": \"12.1.1.4\"}]}}');
 ```
-<img src="./platform/db2.png" width="500" />
+<img src="./db2.png" width="500" />
 
 ## <a name='OAI CN5G-开启'></a>2.5 OAI CN5G-开启
 ```
@@ -309,7 +309,7 @@ make -j8
 ## <a name='商用 UE-设置和配置'></a>5.1 商用 UE-设置和配置
 SIM卡烧录
 界面大致如下所示，主要需要填写的几个参数有IMSI，opc，key（和核心网对齐）。
-<img src="./platform/sim.png" width="500" />
+<img src="./sim.png" width="500" />
 
 opc和key需要与核心网中的yaml文件一样，如果没有自己修改过的话（建议不要自己改），应该烧写如下的值（建议还是到yaml文件中确认一下）
 这两个不区分大小写
@@ -440,8 +440,8 @@ iperf3 -B 12.1.2.2 -c 192.168.70.135 -p 5202 -t 400 -R
 nano rrmPolicy.json
 
 ```
-<img src="./platform/rrmPolicy.png" width="500" />
-<img src="./platform/rrmPolicy2.png" width="500" />
+<img src="./rrmPolicy.png" width="500" />
+<img src="./rrmPolicy2.png" width="500" />
 
 另一台计算机器充当UE，使用USRPb210进行空口传输:
 ```
@@ -487,7 +487,7 @@ sudo iptables -t nat -I POSTROUTING 1 -s 172.16.0.0/24 -o enx2c16dbab4418 -j MAS
 
 # <a name='真实环境部署网络注意事项'></a>8. 真实环境部署网络注意事项
 当前使用基站和核心网分开位于不同的机器上，因此需要如图NIC的网络接口，这是我们使用一根网线实现连接。需要在不同的主机上设置网线的ip地址。
-<img src="./platform/network_set.png" width="500" />
+<img src="./network_set.png" width="500" />
 
 ### 核心网主机设置
 大多数情况下，计算机未配置数据包转发。可以使用下面的命令来完成（如果您已经在任何其他部分中完成了，则不要重复）。
