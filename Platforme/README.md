@@ -408,6 +408,8 @@ cd ~/openairinterface5g
 source oaienv
 cd cmake_targets/ran_build/build
 sudo ./nr-uesoftmodem -r 106 --numerology 1 --band 78 -C 3619200000 --sa -O ../../../targets/PROJECTS/GENERIC-NR-5GC/CONF/nrUE_slice1.conf --rfsim --rfsimulator.serveraddr 127.0.0.1
+ping 192.168.70.135 -I oai-tun1
+iperf -s -u -i 1 -B UE_IP
 ```
 虚拟仿真模式需要多个UE时(https://gitlab.eurecom.fr/oai/openairinterface5g/-/blob/develop/doc/NR_SA_Tutorial_OAI_multi_UE.md)：
 ```
