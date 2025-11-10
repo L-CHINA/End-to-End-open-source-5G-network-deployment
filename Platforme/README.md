@@ -427,7 +427,8 @@ sudo ./nr-uesoftmodem -r 106 --numerology 1 --band 78 -C 3619200000 --sa -O ../.
 #测试验证：
 #进入ext-dn
 sudo docker exec -it oai-ext-dn bash
-perf3 -s -p 5201 &
+apt-get update
+apt-get install -y iperf3
 iperf3 -s -p 5202 &
 #UE1连接：
 sudo ip netns exec ue1 bash
