@@ -19,7 +19,7 @@
 - [4. Flexric-OAI](#4-Flexric-OAI)
   - [4.1 Flexric-OAI-安装和运行](#41-Flexric-OAI-安装和运行)
   - [4.2 Flexric-OAI-xApp](#42-Flexric-OAI-xApp)
-  - [4.2 Flexric-OAI-xApp-重新设计编译](#43-Flexric-OAI-xApp-重新设计编译)
+  - [4.3 Flexric-OAI-xApp-重新设计编译](#43-Flexric-OAI-xApp-重新设计编译)
 - [5. 终端-UE](#5-终端-UE)
   - [5.1 商用 UE-设置和配置](#51-商用-UE-设置和配置)
   - [5.2 软仿OAI UE-设置和配置](#52-软仿OAI-UE-设置和配置)
@@ -290,12 +290,12 @@ git apply ../doc/rrmPolicyJson.patch
 ------修改完以后进行build编译存放在build/example目录下
 ```
 /home/wp/flexric/examples/xApp/c/ctrl/CMakeLists.txt中添加
-如下add_executable(xapp_rc_slice_ctrl_liqiao
-  xapp_rc_slice_ctrl_liqiao.c
+如下add_executable(xapp_prb_policy_iface
+  xapp_prb_policy_iface.c
   ../../../../src/util/alg_ds/alg/defer.c
 )
 
-target_link_libraries(xapp_rc_slice_ctrl_liqiao
+target_link_libraries(xapp_prb_policy_iface
   PUBLIC
   e42_xapp
   -pthread
@@ -305,7 +305,7 @@ target_link_libraries(xapp_rc_slice_ctrl_liqiao
 cd ~/flexric
 cmake --build build --target xapp_prb_policy_iface -j$(nproc)
 ```
-xapp_prb_policy_iface.c当前主要实现xapp监听0.0.0.0:8089，外面发送到这个地址内容sst:1,sd:5,min:10,max:70,dedicated:90；sst:1,sd:1,min:10,max:70,dedicated:20
+xapp_prb_policy_iface.c当前主要实现xapp监听0.0.0.0:8089，外面发送到这个地址内容sst:1,sd:5,min:10,max:70,dedicated:90；sst:1,sd:1,min:10,max:70,dedicated:20；支持两类切片，会发送到基站分配不同的PRB数。
 
 # <a id='终端-UE'></a>5. 终端-UE
 
