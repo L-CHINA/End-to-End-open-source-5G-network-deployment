@@ -285,7 +285,7 @@ git apply ../doc/rrmPolicyJson.patch
 
 ## <a name='Flexric-OAI-xApp-重新设计编译'></a>4.3 Flexric-OAI-xApp-重新设计编译
 如果你想定制 Python xApp，推荐从 examples/xApp/python3/ 着手；修改后重新编译，就可以在 build/examples/xApp/python3/ 执行。
-可以参照这个项目流程进行xapp的prb策略控制下发[oai-detection](https://github.com/teo-tsou/oai-anomaly-detection/blob/main/README.md)。
+可以参照这个项目流程进行xapp的prb策略控制下发[oai-detection](https://github.com/teo-tsou/oai-anomaly-detection/blob/main/README.md),Codex写出对应代码。
 当你详细设计完代码后，examples是源码的地方，可以修改；在对应的CMakeLists.txt 让 FlexRIC 工程在跑 cmake/make 时知道要产出哪些 xApp 可执行文件，以及每个可执行文件要链接哪些库。你加进去之后，cmake 会在 build/examples/xApp/c/ctrl/ 下自动生成 xapp_prb_policy_iface 这个二进制，只要执行一次 cmake --build … --target xapp_prb_policy_iface 就能编出来。没有它的话，CMake 根本不会尝试编译你新放进去的 xapp_prb_policy_iface.c，所以这是把源码纳入FlexRIC 构建系统的必要步骤。
 ------修改完以后进行build编译存放在build/example目录下
 ```
