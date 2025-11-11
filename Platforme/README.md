@@ -518,4 +518,14 @@ ping 192.168..70.133
 ping 192.168..70.134
 ping 192.168..70.135
 ```
+# <a name='基站自动化安装脚本'></a>9. 基站自动化安装脚本
+
+编译所需gcc安装教程[gcc13](https://zzh1998.com/archives/work/cpp/ubuntu20_gcc/)
+自动化安装脚本[ORAN-Testbed](https://github.com/usnistgov/O-RAN-Testbed-Automation)，注意这个脚本的版本一致性，以及修改满足要求的安装脚本。
+
+
+
+
+
+
 
