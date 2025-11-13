@@ -46,7 +46,7 @@ Slicing is implemented by mapping UEs to unique **S-NSSAI** identifiers (SST, SD
 - [Monitoring](#setup-prometheus-monitoring)
 - [Tests](#generate-traffic-using-iperf3)
 - [Clean the cluster](#clean-the-cluster)
-
+- [kpt和configsyn组件安装](#kpt和configsyn组件安装)
 # Build a K8S cluster
 We assume that a Kubernetes cluster is already running using this repository: https://github.com/AIDY-F2N/k8s-cluster-setup-ubuntu24.git
 kubectl是直接通过containerd来进行容器的管理的，因此下载完后containerd需要像docker一样配置镜像，具体配置过程如下：
@@ -388,5 +388,44 @@ sudo ip link delete cni0
 sudo ip link delete flannel.1
 sudo systemctl restart containerd
 ```
+# kpt和configsyn组件安装
+
+```
+KPT_VER="v1.0.0-beta.37"
+curl -fsSL "https://github.com/kptdev/kpt/releases/download/${KPT_VER}/kpt_linux_amd64-${KPT_VER#v}.tar.gz" -o /tmp/kpt.tgz #若无法下载则换个镜像
+tar -zxf /tmp/kpt.tgz -C /tmp
+sudo install /tmp/kpt /usr/local/bin/kpt
+kpt version
+
+kpt pkg get https://github.com/nephio-project/nephio-packages.git/nephio-configsync@v1.0.1
+kpt live init nephio-configsync
+nano nephio-configsync/rootsync.yaml
+apiVersion: configsync.gke.io/v1beta1
+kind: RootSync
+metadata:
+  name: nephio-workload-cluster-sync
+  namespace: config-management-system
+spec:
+  sourceType: git
+  git:
+    repo: https://github.com/L-CHINA/edge-cluster-1.git// https://github.com/L-CHINA/edge-cluster-2.git
+    branch: main
+    dir: /
+    auth: token
+    secretRef:
+      name: git-creds
+
+kpt live apply nephio-configsync --reconcile-timeout=5m
+
+一键看 RootSync 的详细配置是否对得上
+kubectl -n config-management-system get rootsync nephio-workload-cluster-sync -o jsonpath='\
+URL: {.spec.git.repo}\
+\nBRANCH: {.spec.git.branch}\
+\nDIR: {.spec.git.dir}\
+\nAUTH: {.spec.git.auth}\
+\nSECRET: {.spec.git.secretRef.name}\
+\nFORMAT: {.spec.sourceFormat}\n'
+```
+
 ## Contact
 - Yasser BRAHMI, abdenour-yasser.brahmi@telecom-sudparis.eu
