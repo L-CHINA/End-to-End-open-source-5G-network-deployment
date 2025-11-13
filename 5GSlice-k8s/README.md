@@ -427,5 +427,3 @@ URL: {.spec.git.repo}\
 \nFORMAT: {.spec.sourceFormat}\n'
 ```
 
-## Contact
-- Yasser BRAHMI, abdenour-yasser.brahmi@telecom-sudparis.eu
