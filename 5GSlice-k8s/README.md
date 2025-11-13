@@ -68,6 +68,7 @@ https://blog.gitcode.com/527b1e47677a07453aa8ac1a93ddc762.html
 https://blog.csdn.net/dfxvip872/article/details/148972443
 https://www.bilibili.com/video/BV1iR8MzkESA?spm_id_from=333.788.player.switch&vd_source=dd238c80a2e82684d6d81fc51c170f65&p=2
 https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
+
 下载github的软件下载不下来可以使用以下镜像或者手动下载：https://jishuzhan.net/article/1965957555249266689
 # Tools Setup
 
