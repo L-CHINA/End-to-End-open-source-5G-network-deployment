@@ -408,7 +408,7 @@ metadata:
 spec:
   sourceType: git
   git:
-    repo: https://github.com/L-CHINA/edge-cluster-1.git// https://github.com/L-CHINA/edge-cluster-2.git
+    repo: **https://github.com/L-CHINA/edge-cluster-1.git**
     branch: main
     dir: /
     auth: token
