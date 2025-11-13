@@ -49,7 +49,26 @@ Slicing is implemented by mapping UEs to unique **S-NSSAI** identifiers (SST, SD
 
 # Build a K8S cluster
 We assume that a Kubernetes cluster is already running using this repository: https://github.com/AIDY-F2N/k8s-cluster-setup-ubuntu24.git
+kubectl是直接通过containerd来进行容器的管理的，因此下载完后containerd需要像docker一样配置镜像，具体配置过程如下：
+```
+mkdir -p /etc/containerd/certs.d/docker.io
+cat > /etc/containerd/certs.d/docker.io/hosts.toml << EOF
+server = "https://docker.io"
+[host."https://docker.m.daocloud.io"]
+  capabilities = ["pull", "resolve"]
 
+[host."https://reg-mirror.qiniu.com"]
+  capabilities = ["pull", "resolve"]
+  
+EOF
+```
+原文链接：https://blog.csdn.net/weimeilayer/article/details/140787416
+https://blog.csdn.net/weimeilayer/article/details/140787416
+https://blog.gitcode.com/527b1e47677a07453aa8ac1a93ddc762.html
+https://blog.csdn.net/dfxvip872/article/details/148972443
+https://www.bilibili.com/video/BV1iR8MzkESA?spm_id_from=333.788.player.switch&vd_source=dd238c80a2e82684d6d81fc51c170f65&p=2
+https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
+下载github的软件下载不下来可以使用以下镜像或者手动下载：https://jishuzhan.net/article/1965957555249266689
 # Tools Setup
 
 1.  Install the Helm CLI usnig this link: https://helm.sh/docs/intro/install/
@@ -57,6 +76,13 @@ We assume that a Kubernetes cluster is already running using this repository: ht
 Helm CLI (Command-Line Interface) is a command-line tool used for managing applications on Kubernetes clusters. It is part of the Helm package manager, which helps you package, deploy, and manage applications as reusable units called Helm charts.
 
 Helm provides a straightforward way to define, install, and upgrade complex Kubernetes applications. With Helm, you can define the desired state of your application using a declarative YAML-based configuration file called a Helm chart. A Helm chart contains all the necessary Kubernetes manifests, configurations, and dependencies required to deploy and run your application.
+```
+sudo apt-get install curl gpg apt-transport-https --yes
+curl -fsSL https://packages.buildkite.com/helm-linux/helm-debian/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+echo "deb [signed-by=/usr/share/keyrings/helm.gpg] https://packages.buildkite.com/helm-linux/helm-debian/any/ any main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install helm
+```
 
 2.  Install Helm Spray using this command: 
 ```bash[language=bash]
