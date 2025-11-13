@@ -408,7 +408,7 @@ metadata:
 spec:
   sourceType: git
   git:
-    repo: **https://github.com/L-CHINA/edge-cluster-1.git**
+    repo: 替换为你的地址https://github.com/L-CHINA/edge-cluster-1.git
     branch: main
     dir: /
     auth: token
